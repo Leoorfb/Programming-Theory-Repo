@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperUnit : Unit
+public class JumperUnit : Unit // INHERITANCE
 {
     public float jumpForce = 2F;
 
@@ -16,17 +16,17 @@ public class JumperUnit : Unit
         rigidbody_ = GetComponent<Rigidbody>();
         distToGround = ((GetComponent<CapsuleCollider>().height)/2) + 0.1f;
     }
-    protected override IEnumerator MoveTo(Vector3 position)
+    protected override IEnumerator MoveTo(Vector3 position) // POLYMORPHISM
     {
         position = new Vector3(position.x, transform.position.y, position.z);
-        Debug.Log("Entrou corrotina");
+        //Debug.Log("Entrou corrotina");
         float step = 0.1f;
 
         while (DistanceTo(position) > step)
         {
             if (IsGrounded_)
             {
-                Jump();
+                Jump();// ABSTRACTION
             }
 
             //Debug.Log("corrotina while " + Vector3.Distance(transform.position, position) + " - " + step);
@@ -36,7 +36,7 @@ public class JumperUnit : Unit
             transform.Translate(direction * step);
             yield return null;
         }
-        Debug.Log("Terminou corrotina");
+        //Debug.Log("Terminou corrotina");
     }
 
     private float DistanceTo(Vector3 position)
@@ -45,9 +45,11 @@ public class JumperUnit : Unit
         return (new Vector2(position.x - transform.position.x, position.z - transform.position.z).magnitude);
     }
 
+    /*
     protected bool IsGrounded() {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround);
     }
+    */
 
     private void OnCollisionEnter(Collision collision)
     {

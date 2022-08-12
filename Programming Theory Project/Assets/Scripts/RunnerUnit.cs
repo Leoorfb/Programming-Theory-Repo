@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunnerUnit : Unit
+public class RunnerUnit : Unit // INHERITANCE
 {
-    protected override IEnumerator MoveTo(Vector3 position)
+    protected override IEnumerator MoveTo(Vector3 position) // POLYMORPHISM
     {
         position = new Vector3(position.x, transform.position.y, position.z);
-        Debug.Log("Entrou corrotina");
+        //Debug.Log("Entrou corrotina");
         float step = 0.1f;
 
         while (Vector3.Distance(transform.position, position) > step)
@@ -19,6 +19,6 @@ public class RunnerUnit : Unit
             transform.Translate(direction * step);
             yield return null;
         }
-        Debug.Log("Terminou corrotina");
+        //Debug.Log("Terminou corrotina");
     }
 }
